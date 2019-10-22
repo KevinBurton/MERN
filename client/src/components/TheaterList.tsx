@@ -3,7 +3,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Import React Table
-import ReactTable from "react-table";
+import {useTable} from "react-table";
 import "react-table/react-table.css";
 
 const TheaterList: React.FC = () => {
