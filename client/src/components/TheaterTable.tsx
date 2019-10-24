@@ -3,7 +3,7 @@ import {useTable, usePagination} from 'react-table';
 
 import "../react-table-config.d.ts";
 
-const Table: React.FC = ({columns, data}) => {
+const TheaterTable: React.FC = ({columns, data}) => {
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -111,4 +111,4 @@ const Table: React.FC = ({columns, data}) => {
   )
 }
 
-export default Table;
+export default TheaterTable;

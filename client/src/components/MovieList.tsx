@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import styled from 'styled-components';
 
-import Table from './Table';
+import MovieTable from './MovieTable';
 
 const Styles = styled.div`
   padding: 1rem;
@@ -72,7 +72,7 @@ const MovieList: React.FC = () => {
   return ({movies.length > 0 ?
     (
       <Styles>
-        <Table columns={columns} data={movies}/>
+        <MovieTable columns={columns} data={movies}/>
       </Styles>
     ) : (
       <p>Loading . . .</p>
