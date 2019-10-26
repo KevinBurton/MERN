@@ -4,7 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import styled from 'styled-components';
 
-import MovieTable from './MovieTable';
+import { Table } from './Table';
+
+import { Movie } from '../models/Movie';
 
 const Styles = styled.div`
   padding: 1rem;
@@ -33,9 +35,8 @@ const Styles = styled.div`
     padding: 0.5rem;
   }
 `
-
-const MovieList: React.FC = () => {
-  const [ movies, setMovies] = useState([]);
+export function MovieList() {
+  const [ movies, setMovies] = useState([] as Movie[]);
   useEffect(() => {
     if(movies.length < 1) {
       axios.get('http://localhost:5000/movies/')
@@ -69,14 +70,12 @@ const MovieList: React.FC = () => {
         }
       ],[]);
 
-  return ({movies.length > 0 ?
+  return ({ movies.length > 0 ?
     (
       <Styles>
-        <MovieTable columns={columns} data={movies}/>
+        <Table<Movie> columns={columns} data={movies}/>
       </Styles>
     ) : (
       <p>Loading . . .</p>
     )});
 }
-
-export default MovieList;

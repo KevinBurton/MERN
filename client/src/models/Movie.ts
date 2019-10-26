@@ -21,20 +21,20 @@ export interface Tomato {
 };
 export interface Movie {
       plot: string,
-      genres: [string],
+      genres: string[],
       runtime: number,
-      cast: [string],
+      cast: string[],
       title: string,
       fullplot: string,
-      languages: [string],
+      languages: string[],
       released: Date,
-      directors: [string],
-      writers: [string],
+      directors: string[],
+      writers: string[],
       awards: Award,
       lastupdated: string,
       year: number,
       imdb: Imdb,
-      countries: [string],
+      countries: string[],
       type: string,
       tomatoes: Tomato
 }

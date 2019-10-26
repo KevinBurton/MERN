@@ -1,13 +1,12 @@
 import React from 'react'
 import { Column, usePagination, useTable } from 'react-table'
-import { Movie } from '../models/Movie';
 
-interface IMovieTable {
-  columns: Column<Movie>[],
-  data: Movie[]
+interface ITable<T extends object> {
+  columns: Column<T>[]
+  data: T[]
 }
 
-function MovieTable ({columns, data}: IMovieTable) {
+export function Table<T extends object>({ columns, data }: ITable<T>) {
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -27,7 +26,7 @@ function MovieTable ({columns, data}: IMovieTable) {
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize },
-  } = useTable<Movie>(
+  } = useTable<T>(
     {
       columns,
       data,
@@ -36,8 +35,24 @@ function MovieTable ({columns, data}: IMovieTable) {
     usePagination
   )
 
+  // Render the UI for your table
   return (
     <>
+      <pre>
+        <code>
+          {JSON.stringify(
+            {
+              pageIndex,
+              pageSize,
+              pageCount,
+              canNextPage,
+              canPreviousPage,
+            },
+            null,
+            2
+          )}
+        </code>
+      </pre>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
@@ -49,18 +64,16 @@ function MovieTable ({columns, data}: IMovieTable) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map(
-            (row:any, i) =>
-              prepareRow(row) || (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    )
-                  })}
-                </tr>
-              )
-          )}
+          {page.map((row, i) => {
+            prepareRow(row)
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                })}
+              </tr>
+            )
+          })}
         </tbody>
       </table>
       {/*
@@ -77,7 +90,10 @@ function MovieTable ({columns, data}: IMovieTable) {
         <button onClick={() => nextPage()} disabled={!canNextPage}>
           {'>'}
         </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+        <button
+          onClick={() => gotoPage(pageCount! - 1)}
+          disabled={!canNextPage}
+        >
           {'>>'}
         </button>{' '}
         <span>
@@ -90,7 +106,7 @@ function MovieTable ({columns, data}: IMovieTable) {
           | Go to page:{' '}
           <input
             type="number"
-            defaultValue={pageIndex + 1}
+            defaultValue={'' + pageIndex + 1}
             onChange={e => {
               const page = e.target.value ? Number(e.target.value) - 1 : 0
               gotoPage(page)
@@ -114,5 +130,3 @@ function MovieTable ({columns, data}: IMovieTable) {
     </>
   )
 }
-
-export default MovieTable;
