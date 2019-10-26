@@ -36,7 +36,7 @@ const Styles = styled.div`
   }
 `
 export function MovieList() {
-  const [ movies, setMovies] = useState([] as Movie[]);
+  const [ movies, setMovies] = useState<Movie[]>([]);
   useEffect(() => {
     if(movies.length < 1) {
       axios.get('http://localhost:5000/movies/')

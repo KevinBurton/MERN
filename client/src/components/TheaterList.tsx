@@ -37,7 +37,7 @@ const Styles = styled.div`
 `
 
 export function TheaterList() {
-  const [ theaters, setTheaters] = useState([]);
+  const [ theaters, setTheaters] = useState<Theater[]>([]);
   useEffect(() => {
     if(theaters.length < 1) {
       axios.get('http://localhost:5000/theaters/')
