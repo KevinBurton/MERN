@@ -70,12 +70,12 @@ export function MovieList() {
         }
       ],[]);
 
-  return ({ movies.length > 0 ?
+  return ( movies.length > 0 ?
     (
       <Styles>
         <Table<Movie> columns={columns} data={movies}/>
       </Styles>
     ) : (
       <p>Loading . . .</p>
-    )});
+    ));
 }
