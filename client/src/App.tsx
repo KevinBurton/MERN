@@ -6,6 +6,7 @@ import Navbar from './components/Navigation/Navbar';
 import { MovieList } from './components/Movie/MovieList';
 import TheaterList from './components/Theater/TheaterList';
 import { CreditCardEntry } from './components/CreditCardEntry/CreditCardEntry';
+import './App.scss';
 
 const App: React.FC = () => {
   return (
