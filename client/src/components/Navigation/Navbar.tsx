@@ -13,6 +13,9 @@ const Navbar: React.FC = () => {
           <li className='navbar-item'>
             <Link to='/theaters' className='nav-link'>Theaters</Link>
           </li>
+          <li className='navbar-item'>
+            <Link to='/credit-card' className='nav-link'>Credit Card</Link>
+          </li>
         </ul>
       </div>
     </nav>

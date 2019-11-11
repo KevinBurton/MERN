@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import styled from 'styled-components';
 
-import { Table } from './Table';
+import { Table } from '../Table/Table';
 
-import { Movie } from '../models/Movie';
+import { Movie } from '../../models/Movie';
 
 const Styles = styled.div`
   padding: 1rem;
