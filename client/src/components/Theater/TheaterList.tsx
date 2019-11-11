@@ -8,6 +8,8 @@ import { Table } from '../Table/Table';
 
 import { Theater } from '../../models/Theater';
 
+import { MapDrawing } from '../Map/MapDrawing';
+
 const Styles = styled.div`
   padding: 1rem;
   table {
@@ -95,6 +97,7 @@ export function TheaterList() {
       (
         <Styles>
           <Table<Theater> columns={columns} data={theaters}/>
+          <MapDrawing isMarkerShown/>
         </Styles>
       ) : (
         <p>Loading . . .</p>

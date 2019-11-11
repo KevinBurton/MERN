@@ -1,5 +1,5 @@
 import React from 'react'
-import { Column, usePagination, useTable } from 'react-table'
+import { Column, usePagination, useTable, useRowSelect } from 'react-table'
 
 interface ITable<T extends object> {
   columns: Column<T>[]
@@ -32,7 +32,8 @@ export function Table<T extends object>({ columns, data }: ITable<T>) {
       data,
       initialState: { pageIndex: 2 },
     },
-    usePagination
+    usePagination,
+    useRowSelect
   )
 
   // Render the UI for your table
