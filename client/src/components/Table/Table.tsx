@@ -1,12 +1,12 @@
-import React from 'react'
-import { Column, usePagination, useTable, useRowSelect } from 'react-table'
+import React from 'react';
+import { Column, usePagination, useTable, useRowSelect } from 'react-table';
 
 interface ITable<T extends object> {
   columns: Column<T>[]
-  data: T[]
-}
+  data: T[],
+  setPosition?: (lat: number, lng: number) => void}
 
-export function Table<T extends object>({ columns, data }: ITable<T>) {
+export function Table<T extends object>({ columns, data, setPosition }: ITable<T>) {
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -53,7 +53,22 @@ export function Table<T extends object>({ columns, data }: ITable<T>) {
           {page.map((row, i) => {
             prepareRow(row)
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} onClick={(event: React.MouseEvent<HTMLTableRowElement, MouseEvent>): void => {
+                const parentElement = event.currentTarget.parentElement;
+                const headerElement = event.currentTarget.parentElement && event.currentTarget.parentElement.parentElement ? event.currentTarget.parentElement.parentElement.children[0].children[0] : null;
+                const currentElement = event.currentTarget;
+                if(setPosition &&
+                   headerElement != null &&
+                   parentElement != null &&
+                   headerElement.children.length >= 8 &&
+                   headerElement.children[6].innerHTML.includes('Latitude') &&
+                   headerElement.children[7].innerHTML.includes('Longitude') &&
+                   currentElement.cells.length >= 8) {
+                  const lat = +event.currentTarget.cells[6].innerText;
+                  const lon = +event.currentTarget.cells[7].innerText;
+                  setPosition(lat, lon);
+                }
+              }}>
                 {row.cells.map(cell => {
                   return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                 })}

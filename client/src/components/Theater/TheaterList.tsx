@@ -40,11 +40,21 @@ const Styles = styled.div`
 
 export function TheaterList() {
   const [ theaters, setTheaters] = useState<Theater[]>([]);
+  const [ position, setPosition] = useState({ lng: -93.261429, lat: 45.126179 });
   useEffect(() => {
     if(theaters.length < 1) {
       axios.get('http://localhost:5000/theaters/')
       .then(res => {
+
         setTheaters(res.data);
+
+        if(res.data.length > 0) {
+          setPosition({
+            lng: res.data[0].location.geo.coordinates[0],
+            lat: res.data[0].location.geo.coordinates[1]
+          });
+        }
+
       })
       .catch(err => {
         console.log(`Error: ${err}`)
@@ -96,8 +106,12 @@ export function TheaterList() {
     return ( theaters.length > 0 ?
       (
         <Styles>
-          <Table<Theater> columns={columns} data={theaters}/>
-          <MapDrawing isMarkerShown/>
+          <Table<Theater> columns={columns}
+                          data={theaters}
+                          setPosition={(lat: number, lng: number) => {
+                            setPosition({ lat: lat, lng: lng});
+                          }}/>
+          <MapDrawing/>
         </Styles>
       ) : (
         <p>Loading . . .</p>
