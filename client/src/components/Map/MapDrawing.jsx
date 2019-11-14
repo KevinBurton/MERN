@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { GoogleMap, LoadScriptNext, Data } from '@react-google-maps/api'
 
-export function MapDrawing() {
+export function MapDrawing(props) {
   return (
     <LoadScriptNext
       id="script-loader"
@@ -82,10 +82,7 @@ export function MapDrawing() {
           width: "800px"
         }}
         zoom={12}
-        center={{
-          lng: -122.4116,
-          lat: 37.768921
-        }}
+        center={props.position}
       >
       </GoogleMap>
     </LoadScriptNext>

@@ -111,7 +111,7 @@ export function TheaterList() {
                           setPosition={(lat: number, lng: number) => {
                             setPosition({ lat: lat, lng: lng});
                           }}/>
-          <MapDrawing/>
+          <MapDrawing position={position}/>
         </Styles>
       ) : (
         <p>Loading . . .</p>
